@@ -1,0 +1,20 @@
+{
+  "name": "yelp_camp",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000y\u0000e\u0000l\u0000p\u0000_\u0000c\u0000a\u0000m\u0000p\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yol4L/yelp_camp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yol4L/yelp_camp/issues"
+  },
+  "homepage": "https://github.com/yol4L/yelp_camp#readme"
+}
