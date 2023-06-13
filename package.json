@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/yol4L/yelp_camp/issues"
   },
-  "homepage": "https://github.com/yol4L/yelp_camp#readme"
+  "homepage": "https://github.com/yol4L/yelp_camp#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
 }
