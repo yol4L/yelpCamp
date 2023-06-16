@@ -6,6 +6,11 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const ExpressError = require("./utilities/ExpressError");
 const methodOverride = require("method-override");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
+
+const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 
@@ -42,12 +47,20 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
 
+app.use("/", userRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/reviews", reviewRoutes);
 
@@ -72,6 +85,13 @@ app.use((err, req, res, next) => {
 //   });
 //   await camp.save();
 //   res.send(camp);
+// });
+
+// app.get("/fakeUser", async (req, res) => {
+//   const user = new User({ email: "yola@gmail.com", username: "yola" });
+//   //no need to pass in the password because we would use the register() method.
+//   const newUser = await User.register(user, "yelpcamp");
+//   res.send(newUser);
 // });
 
 app.listen(3000, () => {
