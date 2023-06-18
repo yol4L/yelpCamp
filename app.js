@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+
 // console.log(process.env.SECRET);
 
 const express = require("express");
@@ -14,6 +15,8 @@ const methodOverride = require("method-override");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+
+const mongoSanitize = require("express-mongo-sanitize");
 
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
@@ -38,13 +41,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 // app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  mongoSanitize({
+    replaceWith: "_",
+  })
+);
 
 const sessionConfig = {
+  name: "session",
   secret: "thisshouldbeasecret!",
   resave: false,
   saveUninitialized: true,
   cookies: {
     httpOnly: true,
+    // secure: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
