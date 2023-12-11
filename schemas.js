@@ -1,6 +1,16 @@
 //this is just for validation before we submit something to the database.
 const BaseJoi = require("joi");
-const sanitizeHtml = require("sanitize-html");
+const xss = require("xss");
+
+const xssOptions = {
+  whiteList: {
+    a: ['href', 'title', 'target'], // Allowing certain tags and attributes
+    p: [],
+    div: []
+  },
+  stripIgnoreTag: true, // Remove all tags not in the whitelist
+  stripIgnoreTagBody: ['script'] // Remove the content of script tags
+};
 
 const extension = (joi) => ({
   type: "string",
@@ -11,10 +21,7 @@ const extension = (joi) => ({
   rules: {
     escapeHTML: {
       validate(value, helpers) {
-        const clean = sanitizeHtml(value, {
-          allowedTags: [],
-          allowedAttributes: {},
-        });
+        const clean = xss(value, xssOptions);
         if (clean !== value)
           return helpers.error("string.escapeHTML", { value });
         return clean;
