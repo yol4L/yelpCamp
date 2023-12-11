@@ -2,10 +2,10 @@
   "name": "yelp_camp",
   "version": "1.0.0",
   "description": "A full-stack website project where users can create and review campgrounds.",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node api/index.js"
   },
   "repository": {
     "type": "git",
