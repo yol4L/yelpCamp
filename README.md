@@ -16,4 +16,4 @@ A full-stack website project where users can create and review campgrounds.
 
 ## Demo
 
-This project has been deployed on [Heroku: YelpCamp by Yola](http://www.yelpcamp.com.au/)
+This project has been deployed on [Vercel: YelpCamp by Yola](http://www.yelpcamp.com.au/)
